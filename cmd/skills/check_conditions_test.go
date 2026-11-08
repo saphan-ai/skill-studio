@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/saphan-ai/skills-studio/internal/skillcheck"
+	"github.com/saphan-ai/skill-studio/internal/skillcheck"
 )
 
 // Edge cases of `skills check`, at the command line.

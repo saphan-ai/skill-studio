@@ -1,4 +1,4 @@
-module github.com/saphan-ai/skills-studio
+module github.com/saphan-ai/skill-studio
 
 go 1.26
 

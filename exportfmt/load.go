@@ -12,7 +12,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/saphan-ai/skills-studio/internal/skillfmt"
+	"github.com/saphan-ai/skill-studio/internal/skillfmt"
 )
 
 // Bounds of this program, not rules of the Agent Skills page. A skill over one

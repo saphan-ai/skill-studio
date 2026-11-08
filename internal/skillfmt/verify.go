@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/saphan-ai/skills-studio/spec"
+	"github.com/saphan-ai/skill-studio/spec"
 )
 
 // Result is what Verify found in one skill directory.

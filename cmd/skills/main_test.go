@@ -33,7 +33,7 @@ func do(args ...string) (code int, stdout, stderr string) {
 // demoKey is the published demonstration key: its seed is public, so a
 // signature made with it proves nothing about who signed.
 func demoKey() ed25519.PrivateKey {
-	seed := sha256.Sum256([]byte("skills-studio demonstration key: public, never use it to sign a real skill"))
+	seed := sha256.Sum256([]byte("skill-studio demonstration key: public, never use it to sign a real skill"))
 	return ed25519.NewKeyFromSeed(seed[:])
 }
 

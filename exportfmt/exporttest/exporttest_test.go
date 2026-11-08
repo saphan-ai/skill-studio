@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/saphan-ai/skills-studio/exportfmt"
-	"github.com/saphan-ai/skills-studio/exportfmt/exporttest"
+	"github.com/saphan-ai/skill-studio/exportfmt"
+	"github.com/saphan-ai/skill-studio/exportfmt/exporttest"
 )
 
 // Negative controls (law #27): each wraps a conforming built-in, mutates

@@ -20,7 +20,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/saphan-ai/skills-studio/exportfmt"
+	"github.com/saphan-ai/skill-studio/exportfmt"
 )
 
 // Conformance reports every problem Check finds as a test failure.

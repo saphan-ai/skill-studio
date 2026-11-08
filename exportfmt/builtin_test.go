@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/saphan-ai/skills-studio/exportfmt"
-	"github.com/saphan-ai/skills-studio/exportfmt/exporttest"
+	"github.com/saphan-ai/skill-studio/exportfmt"
+	"github.com/saphan-ai/skill-studio/exportfmt/exporttest"
 )
 
 // Every built-in runs the conformance test; the list is the registry's own, so

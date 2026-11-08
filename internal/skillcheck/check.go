@@ -16,7 +16,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/saphan-ai/skills-studio/internal/skillfmt"
+	"github.com/saphan-ai/skill-studio/internal/skillfmt"
 )
 
 // Severity of a finding.

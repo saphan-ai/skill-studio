@@ -19,7 +19,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/saphan-ai/skills-studio/internal/skillfmt"
+	"github.com/saphan-ai/skill-studio/internal/skillfmt"
 )
 
 // exitLevel1Only is the exit code of a skill that is valid Agent Skills and

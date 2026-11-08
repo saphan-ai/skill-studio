@@ -1,12 +1,12 @@
-# Skills Studio: trust the skills your AI agents use
+# Skill Studio: trust the skills your AI agents use
 
-<p align="center"><img src="docs/images/banner.png" alt="Skills Studio: trust the skills your AI agents use" width="100%"></p>
+<p align="center"><img src="docs/images/banner.png" alt="Skill Studio: trust the skills your AI agents use" width="100%"></p>
 
 
 **For anyone who gives AI agents skills, and has to answer "can we trust this one?"** You do not need to know anything
 about Saphan to read this page.
 
-A skill is a short instruction file an agent loads when a task matches it. Skills Studio checks a skill before it
+A skill is a short instruction file an agent loads when a task matches it. Skill Studio checks a skill before it
 reaches your agents, records what was checked, and hands it over in a form anyone can verify again.
 
 ## Try it first (5 minutes)
@@ -17,12 +17,12 @@ Two words first. A skill's **fingerprint** is a hash of its exact text, so any c
 fingerprint. A skill is **verified** when someone's signature over that fingerprint checks against their public key.
 
 ```
-git clone https://github.com/saphan-ai/skills-studio
-cd skills-studio
+git clone https://github.com/saphan-ai/skill-studio
+cd skill-studio
 go install ./cmd/skills
 ```
 
-<p align="center"><img src="docs/images/skills-studio-try-it.gif" alt="The three commands below, run in a terminal: a skill checked, its signature checked, and a skill refused with the rule it broke" width="100%"></p>
+<p align="center"><img src="docs/images/skill-studio-try-it.gif" alt="The three commands below, run in a terminal: a skill checked, its signature checked, and a skill refused with the rule it broke" width="100%"></p>
 
 **1. Check a real skill.** `read-files` is a small skill that comes with the examples:
 
@@ -106,12 +106,12 @@ trace, and that they can check again themselves.
 In the open where it can be: the format, the checker and the signatures are here today. The quarantine, the sandbox
 runs and the reviews are being built in Saphan Studio, and this page will say when each one is available.
 
-Skills Studio never gives a skill a clean bill of health. It states which checks ran, on which models, and what
+Skill Studio never gives a skill a clean bill of health. It states which checks ran, on which models, and what
 they recorded.
 
 ## What is in this repository
 
-This repository is the **open part** of Skills Studio, under the Apache License 2.0. It lets anyone read, write and
+This repository is the **open part** of Skill Studio, under the Apache License 2.0. It lets anyone read, write and
 verify the skill *format*, and build an independent implementation of it, with no dependency on Saphan Studio:
 
 | path | what it is |
@@ -127,7 +127,7 @@ and are not in this repository.
 ## Use it
 
 ```
-go install github.com/saphan-ai/skills-studio/cmd/skills@latest
+go install github.com/saphan-ai/skill-studio/cmd/skills@latest
 
 skills verify path/to/my-skill
 skills verify path/to/my-skill --signature my-skill.sig --pubkey author.pub
@@ -173,7 +173,7 @@ The tests hold the rules, the schema, the specification text and the examples to
 place and not the others fails the build. Contributions: see [CONTRIBUTING.md](CONTRIBUTING.md). Reporting a
 vulnerability: see [SECURITY.md](SECURITY.md).
 
-**The open parts of Saphan Studio:** [Discover](https://github.com/saphan-ai/discover) · [Mocks Studio](https://github.com/saphan-ai/mocks-studio) · [Tests Studio](https://github.com/saphan-ai/tests-studio) · [Skills Studio](https://github.com/saphan-ai/skills-studio). Each one works on its own. Together they are the instruments AI agents work with in [Saphan Studio](https://saphan.ai/).
+**The open parts of Saphan Studio:** [Discover Studio](https://github.com/saphan-ai/discover-studio) · [Mock Studio](https://github.com/saphan-ai/mock-studio) · [Test Studio](https://github.com/saphan-ai/test-studio) · [Skill Studio](https://github.com/saphan-ai/skill-studio). Each one works on its own. Together they are the instruments AI agents work with in [Saphan Studio](https://saphan.ai/).
 
 ## Licence
 

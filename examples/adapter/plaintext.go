@@ -8,7 +8,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/saphan-ai/skills-studio/exportfmt"
+	"github.com/saphan-ai/skill-studio/exportfmt"
 )
 
 // PlainText is the adapter. It holds no state.

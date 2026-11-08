@@ -4,7 +4,7 @@
 
 Please report privately, not in a public issue. Use GitHub's private
 vulnerability reporting for this repository: open the **Security** tab of
-`saphan-ai/skills-studio`, choose **Report a vulnerability**, and describe what
+`saphan-ai/skill-studio`, choose **Report a vulnerability**, and describe what
 you found.
 
 Include the version or commit you tested, the smallest skill directory or
@@ -33,7 +33,7 @@ The specification, the JSON Schema and `skills verify`. In particular, report:
 
 - What a skill instructs an agent to do. This repository checks the form of a
   skill and a signature over its text; it makes no statement about behaviour.
-- The Skills Studio engine, which is not in this repository.
+- The Skill Studio engine, which is not in this repository.
 - A key that its holder lost or leaked: the verifier checks a signature against
   the key it is given.
 
