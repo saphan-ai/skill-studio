@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/saphan-ai/skills-studio/exportfmt"
+	"github.com/saphan-ai/skill-studio/exportfmt"
 )
 
 const exportUsage = `usage: skills export <dir> --format <name> --out <dir>

@@ -36,7 +36,7 @@ do not:
 
 The specification and the README say what the format is and what the tools check.
 They do not claim that a skill is fit to run, and they do not describe how the
-closed part of Skills Studio works. A change that adds such a claim will be asked
+closed part of Skill Studio works. A change that adds such a claim will be asked
 to remove it.
 
 ## Commits and pull requests

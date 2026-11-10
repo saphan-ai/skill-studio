@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/saphan-ai/skills-studio/spec"
+	"github.com/saphan-ai/skill-studio/spec"
 )
 
 const root = "../.."

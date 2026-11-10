@@ -6,7 +6,7 @@ import (
 	"io"
 	"strconv"
 
-	"github.com/saphan-ai/skills-studio/internal/skillcheck"
+	"github.com/saphan-ai/skill-studio/internal/skillcheck"
 )
 
 var checkUsage = fmt.Sprintf(`usage: skills check <dir> [--json] [--max-domains N]

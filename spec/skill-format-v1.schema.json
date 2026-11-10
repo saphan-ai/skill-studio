@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/saphan-ai/skills-studio/blob/main/spec/skill-format-v1.schema.json",
+  "$id": "https://github.com/saphan-ai/skill-studio/blob/main/spec/skill-format-v1.schema.json",
   "title": "Skill format v1 — front matter of SKILL.md",
   "description": "Describes the front matter of a SKILL.md file after it has been read into the JSON data model (see SKILL_FORMAT_V1.md, section 4). Each constraint sits in its own sub-schema carrying an x-rule annotation: the named rule a validator reports when that constraint fails. x-rule is an annotation; a validator that ignores it still accepts and refuses the same documents.",
   "type": "object",

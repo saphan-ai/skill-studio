@@ -1,5 +1,5 @@
-# The skills image: one static binary on a distroless base, run as a non-root user.
-# `skills verify` and `skills check` read files only: no shell, no git and no network are needed at run time.
+# The skill image: one static binary on a distroless base, run as a non-root user.
+# `skill verify` and `skill check` read files only: no shell, no git and no network are needed at run time.
 # The base images are pinned by version and digest in image/versions.env; make passes them and they win over
 # these defaults. image/scripts/lib.sh refuses a base that is not pinned by digest.
 
@@ -12,7 +12,7 @@ COPY cmd ./cmd
 COPY internal ./internal
 COPY spec ./spec
 ARG VERSION=unset
-RUN CGO_ENABLED=0 go build -trimpath -ldflags "-s -w -X main.version=${VERSION}" -o /out/skills ./cmd/skills
+RUN CGO_ENABLED=0 go build -trimpath -ldflags "-s -w -X main.version=${VERSION}" -o /out/skill ./cmd/skills
 
 FROM ${RUNTIME_IMAGE}
 ARG CREATED=unset
@@ -21,10 +21,10 @@ ARG VERSION=unset
 LABEL org.opencontainers.image.created="${CREATED}" \
       org.opencontainers.image.revision="${REVISION}" \
       org.opencontainers.image.version="${VERSION}" \
-      org.opencontainers.image.title="skills" \
+      org.opencontainers.image.title="skill" \
       org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.source="https://github.com/saphan-ai/skills-studio"
-COPY --from=build /out/skills /usr/local/bin/skills
+      org.opencontainers.image.source="https://github.com/saphan-ai/skill-studio"
+COPY --from=build /out/skill /usr/local/bin/skill
 USER 65532:65532
 WORKDIR /work
-ENTRYPOINT ["/usr/local/bin/skills"]
+ENTRYPOINT ["/usr/local/bin/skill"]

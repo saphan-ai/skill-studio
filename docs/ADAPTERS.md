@@ -46,7 +46,7 @@ none" says nothing was dropped from what this program read.
 
 ## The interface
 
-Package `exportfmt` (`github.com/saphan-ai/skills-studio/exportfmt`):
+Package `exportfmt` (`github.com/saphan-ai/skill-studio/exportfmt`):
 
 ```go
 type Adapter interface {
