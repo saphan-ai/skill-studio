@@ -123,6 +123,7 @@ func verifyLevels(abs string, schema *Schema) (Result, error) {
 		res.NotEvaluated = []string{RuleTextEncoding, RuleHeaderMalformed, RuleFrontMatterSyntax}
 		if l1.Doc != nil {
 			res.Violations = append(res.Violations, schemaViolations(schema, l1.Doc, filepath.Base(abs))...)
+			res.Violations = append(res.Violations, cardViolations(l1.Doc)...)
 			if n, ok := l1.Doc["name"].(string); ok {
 				res.Name = n
 			}
@@ -131,6 +132,7 @@ func verifyLevels(abs string, schema *Schema) (Result, error) {
 	}
 	hash, doc, vs := readDocument(data, schema, filepath.Base(abs), l1.Doc)
 	res.Violations = append(res.Violations, vs...)
+	res.Violations = append(res.Violations, cardViolations(doc)...)
 	if doc == nil {
 		doc = l1.Doc // the subset reader read nothing; level 1 may have
 	}
