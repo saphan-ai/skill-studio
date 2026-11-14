@@ -175,6 +175,18 @@ string. Two keys have a closed set of values; the others are free text.
 | `saphan.conflicts` | free text: skills that do not combine with this one, or `none` |
 | `saphan.upstream` | free text: `<owner>/<repo>@<sha>` of the text it was derived from, or `none` |
 | `saphan.param.<name>` | free text: a parameter the skill takes, with its default |
+| `saphan.card.gives` | free text, trimmed by the engine; empty or only whitespace is refused (`SF-CARD-EMPTY`) |
+| `saphan.card.when` | free text, trimmed by the engine; empty or only whitespace is refused (`SF-CARD-EMPTY`) |
+| `saphan.card.when_not` | free text, trimmed by the engine; empty or only whitespace is refused (`SF-CARD-EMPTY`) |
+| `saphan.card.examples` | free text, trimmed by the engine; empty or only whitespace is refused (`SF-CARD-EMPTY`) |
+| `saphan.card.anti_patterns` | free text, trimmed by the engine; empty or only whitespace is refused (`SF-CARD-EMPTY`) |
+| `saphan.card.related` | comma list of skill names; an empty item is refused (`SF-CARD-LIST-ITEM`) and every item must be a skill name (`SF-CARD-RELATED-NAME`) |
+| `saphan.card.keywords` | comma list; an empty item is refused (`SF-CARD-LIST-ITEM`) |
+| `saphan.card.ecosystems` | comma list; an empty item is refused (`SF-CARD-LIST-ITEM`) |
+
+Any other `saphan.card.<x>` key is refused as `SF-CARD-KEY-UNKNOWN`: the engine
+ignores unknown card keys without a word, so the profile names the misspelling
+instead of dropping the card silently. The eight keys above are the whole of it.
 
 Other keys, including other `saphan.` keys, are carried and not interpreted.
 
@@ -284,15 +296,19 @@ each; without `--level`, the same skill exits 3 when it is valid Agent Skills
 | `SF-METADATA-VALUE-TYPE` | a `metadata` value that is not a string |
 | `SF-SAPHAN-ORIGIN` | `saphan.origin` other than `builtin` or `project` |
 | `SF-SAPHAN-DEFAULT` | `saphan.default` other than `on` or `off` |
+| `SF-CARD-KEY-UNKNOWN` | a `saphan.card.<x>` key that is not one of the eight the engine reads |
+| `SF-CARD-EMPTY` | a `saphan.card.*` key whose value is empty or only whitespace |
+| `SF-CARD-LIST-ITEM` | a `saphan.card.related`, `saphan.card.keywords` or `saphan.card.ecosystems` value with an empty comma-separated item |
+| `SF-CARD-RELATED-NAME` | a `saphan.card.related` item that is not a skill name (`a-z`, `0-9`, `-`, at most 64 characters) |
 | `SF-SIGNATURE-MALFORMED` | a signature file that does not decode to 64 bytes |
 | `SF-PUBKEY-MALFORMED` | a public key file that does not decode to an ed25519 key |
 | `SF-SIGNATURE-INVALID` | a signature that does not verify over the canonical hash |
 
-Every rule above except the last three, and except `SF-FILE-SYMLINK` (a link
-cannot be committed portably), has a skill in `examples/invalid/<rule>/` that is
-refused by that rule and no other. The schema carries the rule name of each of
-its constraints in an `x-rule` annotation; the annotation does not change which
-documents are accepted.
+Every rule above has a skill in `examples/invalid/<rule>/` that is refused by
+that rule and no other, except the last three (signature rules: they judge
+signatures, not skills) and `SF-FILE-SYMLINK` (a link cannot be committed
+portably). The schema carries the rule name of each of its constraints in an
+`x-rule` annotation; the annotation does not change which documents are accepted.
 
 ## 10. What "verified" means
 
@@ -385,7 +401,8 @@ whose `SKILL.md` cannot be read is therefore never a clean run.
 
 Each URL yields exactly one finding, under the strongest rule that applies:
 `SC-URL-FETCH`, then `SC-URL-MOVING-REF`, then `SC-URL`. A file that is found
-under a directory named `scripts`, at any depth, is covered by that directory's finding. The magic number `MZ` counts only in a file that is not UTF-8 text.
+under a directory named `scripts`, at any depth, is covered by that directory's
+finding. The magic number `MZ` counts only in a file that is not UTF-8 text.
 `SC-EXECUTABLE` names the next act: a script never enters a skill; admit it as
 a tool through `saphan tool admit` and cite the tool by id.
 
@@ -535,8 +552,9 @@ Level 1 does not check: the layout of the directory (`scripts/`, `references/`,
 type of `license` (the page gives it no length and no type rule); that the
 `allowed-tools` string is made of tool names, or that the tools exist; the size
 of `SKILL.md` (the page's 500 lines and 5000 tokens are guidance, and the body
-is not read at all); YAML merge keys (`<<`), which are not applied: a `<<` key is read as a literal
-key, so under `metadata` it is refused as a non-string value; whether the body is Markdown, valid UTF-8 or has LF line
+is not read at all); YAML merge keys (`<<`), which are not applied: a `<<` key
+is read as a literal key, so under `metadata` it is refused as a non-string
+value; whether the body is Markdown, valid UTF-8 or has LF line
 ends; a byte order mark or CR LF line ends (both are read through, and are
 profile rules); symbolic links inside the skill (they are not followed, and are
 profile rules); and anything the skill tells an agent to do. The page also names
@@ -558,7 +576,7 @@ error, level 1 rules first, and exits 1.
 | 0 | level 2 reached (with `--level 1`: level 1 or 2) |
 | 1 | refused with a named rule: not valid Agent Skills, or below the level `--level` asked for |
 | 2 | usage, or a path that cannot be read |
-| 3 | valid Agent Skills (level 1) and outside the profile; this is not a refusal of the file |
+| 3 | valid Agent Skills (level 1), outside the profile; this is not a refusal of the file |
 
 `--level 2` makes the check the profile check it was before this section: exit 0
 at level 2, exit 1 for anything below it, every rule printed to standard error.

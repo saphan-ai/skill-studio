@@ -181,7 +181,7 @@ func TestEveryRuleIsExemplifiedAnnotatedAndSpecified(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, r := range Rules {
-		inSchema := strings.Contains(string(schemaText), "`"+r.ID+`"`)
+		inSchema := strings.Contains(string(schemaText), `"`+r.ID+`"`)
 		inCode := schemaRule(r.ID)
 		if inSchema != inCode {
 			t.Errorf("rule %s: in schema=%v, expected schema rule=%v", r.ID, inSchema, inCode)
@@ -302,7 +302,7 @@ func TestSymlinkIsRefusedAnywhere(t *testing.T) {
 		res, _ := Verify(dir)
 		want := []string{RuleFileSymlink}
 		if got := rulesOf(res.Violations); !reflect.DeepEqual(got, want) {
-			t.Errorf("%s: refused by %v, want %s", where, got, want)
+			t.Errorf("%s: refused by %v, want %v", where, got, want)
 		}
 	}
 }
@@ -598,7 +598,7 @@ func TestFrontMatterReader(t *testing.T) {
 	// Non-printable code points anywhere in the front matter, comments included.
 	for name, r := range map[string]string{
 		"ESC": "\x1b", "SOH": "\x01", "DEL": "\x7f", "NEL U+0085": "\u0085",
-		"C1 U+0090": "\u0090", "LS U+2028": "\u2028", "PS U+2029": "\u2029",
+		"C1 U+0090": "\u0090", "LS U+2028": " ", "PS U+2029": " ",
 	} {
 		for where, text := range map[string]string{
 			"value":   "---\nname: a\ndescription: x" + r + "y\n---\n",
@@ -611,7 +611,7 @@ func TestFrontMatterReader(t *testing.T) {
 		}
 	}
 	// Near misses stay strings: only what a YAML reader resolves otherwise is refused.
-	for _, v := range []string{"0xZZ", "2026-10-31 release notes", "1:a", "1_a", "a_b", ".infinity", "0o9", "0b2", "v1:20", "tab	here", "é — ü"} {
+	for _, v := range []string{"0xZZ", "2026-10-31 release notes", "1:a", "1_a", "a_b", ".infinity", "0o9", "0b2", "v1:20", "tab    here", "é — ü"} {
 		text := "---\nname: a\ndescription: " + v + "\n---\n"
 		got, viol := ParseFrontMatter([]byte(text))
 		if viol != nil || got["description"] != v {
