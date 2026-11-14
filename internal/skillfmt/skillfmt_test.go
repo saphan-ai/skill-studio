@@ -102,6 +102,40 @@ func TestInvalidExamplesRefusedByExactlyTheirRule(t *testing.T) {
 	}
 }
 
+// The engine reads eight saphan.card.* metadata keys and silently drops a
+// malformed one: an unknown key, an empty value, an empty list item, or a
+// related item that is not a skill name. The profile names each with a rule
+// of its own, and each invalid example is refused by exactly its rule.
+func TestCardRulesRejectMalformedCardMetadata(t *testing.T) {
+	cases := []struct {
+		rule string
+		dir  string
+	}{
+		{RuleCardKeyUnknown, "sf-card-key-unknown"},
+		{RuleCardEmpty, "sf-card-empty"},
+		{RuleCardListItem, "sf-card-list-item"},
+		{RuleCardRelatedName, "sf-card-related-name"},
+	}
+	for _, c := range cases {
+		t.Run(c.rule, func(t *testing.T) {
+			kids := subdirs(t, repoPath("examples", "invalid", c.dir))
+			if len(kids) != 1 {
+				t.Fatalf("%s: want exactly one skill directory, found %v", c.dir, kids)
+			}
+			res, err := Verify(repoPath("examples", "invalid", c.dir, kids[0]))
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Passed() {
+				t.Fatalf("%s: accepted; %s is not refused", c.dir, c.rule)
+			}
+			if got := rulesOf(res.Violations); !reflect.DeepEqual(got, []string{c.rule}) {
+				t.Fatalf("%s: refused by %v, want exactly [%s]: %+v", c.dir, got, c.rule, res.Violations)
+			}
+		})
+	}
+}
+
 // The census holds the rule list, the examples, the schema annotations and the
 // specification text to one another: a rule added to one and not the others
 // turns this test red.
@@ -147,7 +181,7 @@ func TestEveryRuleIsExemplifiedAnnotatedAndSpecified(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, r := range Rules {
-		inSchema := strings.Contains(string(schemaText), `"`+r.ID+`"`)
+		inSchema := strings.Contains(string(schemaText), "`"+r.ID+`"`)
 		inCode := schemaRule(r.ID)
 		if inSchema != inCode {
 			t.Errorf("rule %s: in schema=%v, expected schema rule=%v", r.ID, inSchema, inCode)
@@ -268,7 +302,7 @@ func TestSymlinkIsRefusedAnywhere(t *testing.T) {
 		res, _ := Verify(dir)
 		want := []string{RuleFileSymlink}
 		if got := rulesOf(res.Violations); !reflect.DeepEqual(got, want) {
-			t.Errorf("%s: refused by %v, want %v", where, got, want)
+			t.Errorf("%s: refused by %v, want %s", where, got, want)
 		}
 	}
 }
@@ -564,7 +598,7 @@ func TestFrontMatterReader(t *testing.T) {
 	// Non-printable code points anywhere in the front matter, comments included.
 	for name, r := range map[string]string{
 		"ESC": "\x1b", "SOH": "\x01", "DEL": "\x7f", "NEL U+0085": "\u0085",
-		"C1 U+0090": "\u0090", "LS U+2028": " ", "PS U+2029": " ",
+		"C1 U+0090": "\u0090", "LS U+2028": "\u2028", "PS U+2029": "\u2029",
 	} {
 		for where, text := range map[string]string{
 			"value":   "---\nname: a\ndescription: x" + r + "y\n---\n",
@@ -577,7 +611,7 @@ func TestFrontMatterReader(t *testing.T) {
 		}
 	}
 	// Near misses stay strings: only what a YAML reader resolves otherwise is refused.
-	for _, v := range []string{"0xZZ", "2026-10-31 release notes", "1:a", "1_a", "a_b", ".infinity", "0o9", "0b2", "v1:20", "tab here", "é — ü"} {
+	for _, v := range []string{"0xZZ", "2026-10-31 release notes", "1:a", "1_a", "a_b", ".infinity", "0o9", "0b2", "v1:20", "tab	here", "é — ü"} {
 		text := "---\nname: a\ndescription: " + v + "\n---\n"
 		got, viol := ParseFrontMatter([]byte(text))
 		if viol != nil || got["description"] != v {

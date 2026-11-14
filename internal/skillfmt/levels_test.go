@@ -66,6 +66,8 @@ func TestInvalidExamplesLevel(t *testing.T) {
 		"sf-file-script": true, "sf-file-unlisted": true, "sf-key-unknown": true,
 		"sf-saphan-default": true, "sf-saphan-origin": true, "sf-text-encoding": true,
 		"sf-skillmd-size": true, "sf-frontmatter-syntax": true,
+		"sf-card-key-unknown": true, "sf-card-empty": true, "sf-card-list-item": true,
+		"sf-card-related-name": true,
 		// license is not typed by the Agent Skills page: a number there is not a level 1 fault.
 		"sf-field-type": true,
 	}
