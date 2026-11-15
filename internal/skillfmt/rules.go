@@ -50,6 +50,10 @@ const (
 	RuleMetadataValueType   = "SF-METADATA-VALUE-TYPE"
 	RuleSaphanOrigin        = "SF-SAPHAN-ORIGIN"
 	RuleSaphanDefault       = "SF-SAPHAN-DEFAULT"
+	RuleCardKeyUnknown      = "SF-CARD-KEY-UNKNOWN"
+	RuleCardEmpty           = "SF-CARD-EMPTY"
+	RuleCardListItem        = "SF-CARD-LIST-ITEM"
+	RuleCardRelatedName     = "SF-CARD-RELATED-NAME"
 	RuleSignatureMalformed  = "SF-SIGNATURE-MALFORMED"
 	RulePubkeyMalformed     = "SF-PUBKEY-MALFORMED"
 	RuleSignatureInvalid    = "SF-SIGNATURE-INVALID"
@@ -84,6 +88,10 @@ var Rules = []Rule{
 	{RuleMetadataValueType, "a metadata value is not a string", true},
 	{RuleSaphanOrigin, "saphan.origin is neither builtin nor project", true},
 	{RuleSaphanDefault, "saphan.default is neither on nor off", true},
+	{RuleCardKeyUnknown, "a saphan.card.* key the engine does not read", true},
+	{RuleCardEmpty, "a saphan.card.* key whose value is empty or only whitespace", true},
+	{RuleCardListItem, "a saphan.card.related, saphan.card.keywords or saphan.card.ecosystems value with an empty comma-separated item", true},
+	{RuleCardRelatedName, "a saphan.card.related item that is not a skill name", true},
 	{RuleSignatureMalformed, "the signature file does not decode to 64 bytes", false},
 	{RulePubkeyMalformed, "the public key file does not decode to an ed25519 key", false},
 	{RuleSignatureInvalid, "the signature does not verify over the canonical hash", false},
