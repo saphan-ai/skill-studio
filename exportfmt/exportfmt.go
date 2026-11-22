@@ -49,7 +49,7 @@ type Skill struct {
 	Files []File
 	// SkillMD is the SKILL.md exactly as it was read.
 	SkillMD []byte
-	// Hash is the canonical hash; empty unless the skill is also in the Saphan
+	// Hash is the canonical hash; empty unless the skill is also in the Saphan Studio
 	// profile (level 2).
 	Hash string
 }

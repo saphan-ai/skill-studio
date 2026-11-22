@@ -2,7 +2,7 @@
 //
 //	skills verify <dir> [--level 1|2] [--signature <file> --pubkey <file>]
 //
-// Two levels: 1 is valid Agent Skills, 2 is the Saphan profile (which includes
+// Two levels: 1 is valid Agent Skills, 2 is the Saphan Studio profile (which includes
 // level 1). Exit codes: 0 the level reached meets the one asked for (level 2
 // when no --level is given), 1 refused with a named rule, 2 usage, 3 valid
 // Agent Skills but outside the profile (no --level given).
@@ -23,7 +23,7 @@ import (
 )
 
 // exitLevel1Only is the exit code of a skill that is valid Agent Skills and
-// outside the Saphan profile. It is not a refusal of the skill.
+// outside the Saphan Studio profile. It is not a refusal of the skill.
 const exitLevel1Only = 3
 
 const usage = `usage: skills verify <dir> [--level 1|2] [--signature <file> --pubkey <file>]
@@ -32,7 +32,7 @@ const usage = `usage: skills verify <dir> [--level 1|2] [--signature <file> --pu
 
   verify <dir>   read the skill directory at two levels and print the level
                  reached: level 1, valid Agent Skills (the rules of the Agent
-                 Skills specification page); level 2, the Saphan profile (level 1
+                 Skills specification page); level 2, the Saphan Studio profile (level 1
                  plus the rules of skill format v1). A level 1 skill is printed
                  with every profile rule that keeps it out of level 2. At level 2
                  the canonical hash is printed.
@@ -46,7 +46,7 @@ const usage = `usage: skills verify <dir> [--level 1|2] [--signature <file> --pu
 exit codes: 0 level 2 reached (or, with --level 1, level 1 or 2)
             1 refused with a named rule: not valid Agent Skills (or below --level)
             2 usage
-            3 valid Agent Skills (level 1), outside the Saphan profile
+            3 valid Agent Skills (level 1), outside the Saphan Studio profile
 `
 
 func main() {
@@ -135,7 +135,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 		return 1
 	}
 	if res.Level == 1 {
-		fmt.Fprintf(stdout, "skill: %s\nlevel: 1 (valid Agent Skills; the Saphan profile is not met)\n", res.Name)
+		fmt.Fprintf(stdout, "skill: %s\nlevel: 1 (valid Agent Skills; the Saphan Studio profile is not met)\n", res.Name)
 		for _, v := range res.Violations {
 			fmt.Fprintf(stdout, "outside-profile %s: %s: %s\n", v.Rule, v.Path, v.Message)
 		}
@@ -169,7 +169,7 @@ func run(args []string, stdout, stderr io.Writer) int {
 		}
 		signatureLine = "signature: ed25519 valid over canonical-sha256 (nothing else is claimed)"
 	}
-	fmt.Fprintf(stdout, "skill: %s\nlevel: 2 (valid Agent Skills, and the Saphan profile is met)\ncanonical-sha256: %s\nformat: skill-format-v1 ok\n%s\n", res.Name, res.Hash, signatureLine)
+	fmt.Fprintf(stdout, "skill: %s\nlevel: 2 (valid Agent Skills, and the Saphan Studio profile is met)\ncanonical-sha256: %s\nformat: skill-format-v1 ok\n%s\n", res.Name, res.Hash, signatureLine)
 	return 0
 }
 

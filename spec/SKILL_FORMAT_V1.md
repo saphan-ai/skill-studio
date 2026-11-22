@@ -472,7 +472,7 @@ remark: a clean result is evidence that these patterns are absent and nothing mo
 A claim about behaviour needs its own evidence: the checks run, the models they
 ran on and the trace they produced. This section makes none.
 
-## 13. Two levels: valid Agent Skills, and the Saphan profile
+## 13. Two levels: valid Agent Skills, and the Saphan Studio profile
 
 `skills verify` reads a skill directory at two levels and prints the one it
 reached.
@@ -481,7 +481,7 @@ reached.
   page, and no others. The page is `https://agentskills.io/specification`; it was
   read on **2026-11-02**, and it carries no version or date of its own, so that
   date is the only pin there is.
-- **Level 2, the Saphan profile.** Level 1 and every rule of sections 2 to 9:
+- **Level 2, the Saphan Studio profile.** Level 1 and every rule of sections 2 to 9:
   the layout, the YAML subset, the closed set of keys, the size limit and the
   text rules. A skill at level 2 has the canonical hash of section 8.
 

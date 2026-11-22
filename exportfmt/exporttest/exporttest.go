@@ -40,7 +40,7 @@ type fixture struct {
 
 var fixtures = []fixture{
 	{
-		// Level 2 (the Saphan profile): every front matter field the profile
+		// Level 2 (the Saphan Studio profile): every front matter field the profile
 		// defines, a references/ and an assets/ file, and so a canonical hash.
 		name: "fx-full",
 		files: map[string]string{

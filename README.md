@@ -4,7 +4,7 @@
 
 
 **For anyone who gives AI agents skills, and has to answer "can we trust this one?"** You do not need to know anything
-about Saphan to read this page.
+about Saphan Studio to read this page.
 
 A skill is a short instruction file an agent loads when a task matches it. Skill Studio checks a skill before it
 reaches your agents, records what was checked, and hands it over in a form anyone can verify again.

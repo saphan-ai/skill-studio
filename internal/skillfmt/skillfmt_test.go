@@ -84,21 +84,24 @@ func TestInvalidExamplesRefusedByExactlyTheirRule(t *testing.T) {
 	for _, ruleDir := range subdirs(t, repoPath("examples", "invalid")) {
 		want := strings.ToUpper(ruleDir)
 		kids := subdirs(t, repoPath("examples", "invalid", ruleDir))
-		if len(kids) != 1 {
-			t.Fatalf("%s: want exactly one skill directory, found %v", ruleDir, kids)
+		sort.Strings(kids)
+		if len(kids) == 0 {
+			t.Fatalf("%s: want at least one skill directory", ruleDir)
 		}
-		t.Run(ruleDir, func(t *testing.T) {
-			res, err := Verify(repoPath("examples", "invalid", ruleDir, kids[0]))
-			if err != nil {
-				t.Fatal(err)
-			}
-			if res.Passed() || res.Hash != "" {
-				t.Fatalf("accepted; hash %q", res.Hash)
-			}
-			if got := rulesOf(res.Violations); !reflect.DeepEqual(got, []string{want}) {
-				t.Fatalf("refused by %v, want exactly [%s]: %+v", got, want, res.Violations)
-			}
-		})
+		for _, kid := range kids {
+			t.Run(ruleDir+"/"+kid, func(t *testing.T) {
+				res, err := Verify(repoPath("examples", "invalid", ruleDir, kid))
+				if err != nil {
+					t.Fatal(err)
+				}
+				if res.Passed() || res.Hash != "" {
+					t.Fatalf("%s: accepted; hash %q", kid, res.Hash)
+				}
+				if got := rulesOf(res.Violations); !reflect.DeepEqual(got, []string{want}) {
+					t.Fatalf("%s: refused by %v, want exactly [%s]: %+v", kid, got, want, res.Violations)
+				}
+			})
+		}
 	}
 }
 

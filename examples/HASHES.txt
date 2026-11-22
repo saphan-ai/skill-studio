@@ -3,3 +3,6 @@
 # spaces, the skill directory relative to examples/.
 7273c8112a081b0c93ac5b4f7a33f8dc4b6b50df2b55f0ae0dfdd8ff7000db2c  valid/read-files
 76a80fd3b7916e0e77efe5657da679a5f35aa136008bc1ae78bd1044e44dab07  valid/read-git
+89cd34495fe944626e15db8500c4a0184501321dfb0311816185d2f834f96e1a  valid/header-stripped
+60f739e00f71a444aa6510b1deef8aa2f5000113f0060dfa97ff925227084c79  valid/header-in-body
+277c34946c047fa42fef041e533f4a1ea802399d6adcc0558d85fbc67d2f2a60  valid/close-must-be-alone

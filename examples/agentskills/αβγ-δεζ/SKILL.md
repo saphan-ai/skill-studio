@@ -1,7 +1,7 @@
 ---
 name: αβγ-δεζ
 description: "Greets the user in Greek: a skill whose name is written in lowercase letters outside a-z. Use when an example of a unicode name is needed."
-metadata: {author: example, tier: "2"}   # a flow map and a comment: YAML, though not in the Saphan subset
+metadata: {author: example, tier: "2"}   # a flow map and a comment: YAML, though not in the Saphan Studio subset
 ---
 
 # A unicode name

@@ -64,7 +64,7 @@ type Importer interface {                           // optional
 Skills: `Name`, `Description`, `License`, `Compatibility`, `AllowedTools`,
 `Metadata`, `Extra` (every other front matter key), `Body`, `Files` (every file
 besides `SKILL.md`), `SkillMD` (the file as read) and `Hash` (the canonical hash;
-empty unless the skill is also in the Saphan profile). A `Loss` is an `Item` and
+empty unless the skill is also in the Saphan Studio profile). A `Loss` is an `Item` and
 a one-line `Reason`. An `Item` is a front matter key, `canonical-hash`, `projection-header` (the header that may open SKILL.md; `Skill.HasProjectionHeader` says whether it does), a file
 path, or a top level directory with a trailing slash.
 

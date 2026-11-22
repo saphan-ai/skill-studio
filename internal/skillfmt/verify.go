@@ -15,7 +15,7 @@ import (
 type Result struct {
 	// Name is the front matter name, when it could be read.
 	Name string
-	// Level is the level reached: 2 is the Saphan profile (valid Agent Skills and
+	// Level is the level reached: 2 is the Saphan Studio profile (valid Agent Skills and
 	// every profile rule met), 1 is valid Agent Skills with at least one profile
 	// rule unmet, 0 is neither.
 	Level int
@@ -37,7 +37,7 @@ type Result struct {
 func (r Result) Passed() bool { return r.Level == 2 }
 
 // Verify checks the skill directory at two levels: level 1, the rules of the
-// Agent Skills page, and level 2, the Saphan profile (file layout, front matter
+// Agent Skills page, and level 2, the Saphan Studio profile (file layout, front matter
 // against the published schema, the name against the directory name, and the
 // canonical hash). The error return is for what is not a refusal of the skill
 // — a path that is not a readable directory.

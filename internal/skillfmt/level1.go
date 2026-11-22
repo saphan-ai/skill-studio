@@ -135,7 +135,7 @@ func asViolation(rule, path, format string, a ...any) []Violation {
 func readLevel1Text(head []byte, truncated bool, dirName string) level1Read {
 	text, v := CanonicalText(normalizeText(head))
 	if v != nil {
-		// The projection header is part of the Saphan format; the page defines none.
+		// The projection header is part of the Saphan Studio format; the page defines none.
 		// Without a closed header the front matter cannot be located.
 		return level1Read{Violations: asViolation(RuleASFrontMatterMissing, "SKILL.md", "the file opens with a projection header that is not well formed: %s", v.Message)}
 	}
